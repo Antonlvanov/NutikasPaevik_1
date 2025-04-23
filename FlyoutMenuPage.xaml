@@ -1,0 +1,46 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:NutikasPaevik"
+             x:Class="NutikasPaevik.FlyoutMenuPage"
+             Padding="10,40,0,0"
+             IconImageSource="cat.png"
+             Title="Isiklik korraldaja">
+
+    <CollectionView x:Name="collectionView"
+                    x:FieldModifier="public"
+                    SelectionMode="Single">
+        <CollectionView.ItemsSource>
+            <x:Array Type="{x:Type local:FlyoutPageItem}">
+                <local:FlyoutPageItem Title="Koduleht"
+                                      IconSource="contacts.png"
+                                      TargetType="{x:Type local:HomePage}" />
+                <local:FlyoutPageItem Title="Päevik"
+                                      IconSource="todo.png"
+                                      TargetType="{x:Type local:PaevikPage}" />
+                <local:FlyoutPageItem Title="Planeeria"
+                                      IconSource="reminders.png"
+                                      TargetType="{x:Type local:PlaneeriaPage}" />
+            </x:Array>
+        </CollectionView.ItemsSource>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="local:FlyoutPageItem">
+                <Grid Padding="5,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image Source="{Binding IconSource}" />
+
+                    <Label Grid.Column="1"
+                           Margin="20,0"
+                           Text="{Binding Title}"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center" />
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>
