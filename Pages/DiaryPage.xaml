@@ -1,7 +1,7 @@
 ﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NutikasPaevik.DiaryPage"
-             xmlns:local="clr-namespace:NutikasPaevik.Views"
+             xmlns:local="clr-namespace:NutikasPaevik.Pages.Views"
              BackgroundColor="#F5F5F5"
              Title="Päevik">
 

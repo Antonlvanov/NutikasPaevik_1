@@ -1,21 +1,27 @@
-using CommunityToolkit.Maui.Views;
+Ôªøusing CommunityToolkit.Maui.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 using Microsoft.Maui.Controls;
-using NutikasPaevik.Views;
+using NutikasPaevik.Pages.Views;
+using NutikasPaevik.Database;
 
 namespace NutikasPaevik
 {
     public partial class DiaryPage : ContentPage
     {
-        public DiaryPage()
+        public DiaryPage() : this(DependencyService.Get<DiaryViewModel>())
+        {
+        }
+
+        public DiaryPage(DiaryViewModel viewModel)
         {
             InitializeComponent();
-            BindingContext = new DiaryViewModel();
+            BindingContext = viewModel;
         }
     }
+
 
     public class NotePopup : Popup
     {
@@ -36,12 +42,12 @@ namespace NutikasPaevik
             Color = Color.FromArgb("#FFFFFF");
 
             var stackLayout = new StackLayout { Padding = 20, Spacing = 10 };
-            var titleLabel = new Label { Text = "ÕÓ‚‡ˇ Á‡ÏÂÚÍ‡", FontSize = 20, FontAttributes = FontAttributes.Bold, HorizontalOptions = LayoutOptions.Center };
-            _titleEntry = new Entry { Placeholder = "Õ‡Á‚‡ÌËÂ Á‡ÏÂÚÍË", Margin = new Thickness(0, 10, 0, 0) };
-            _contentEntry = new Editor { Placeholder = "—Ó‰ÂÊËÏÓÂ Á‡ÏÂÚÍË", HeightRequest = 200, Margin = new Thickness(0, 10, 0, 0) };
-            var saveButton = new Button { Text = "—Óı‡ÌËÚ¸", BackgroundColor = Color.FromArgb("#4CAF50"), TextColor = Colors.White, CornerRadius = 5, Margin = new Thickness(0, 10, 0, 0) };
+            var titleLabel = new Label { Text = "ƒ∂ƒ´ƒÅƒÖÀô ƒìƒÖƒ£√•≈Ü≈∫ƒÖ", FontSize = 20, FontAttributes = FontAttributes.Bold, HorizontalOptions = LayoutOptions.Center };
+            _titleEntry = new Entry { Placeholder = "ƒ∂ƒÖƒìƒÅƒÖƒ∑ƒç√• ƒìƒÖƒ£√•≈Ü≈∫ƒç", Margin = new Thickness(0, 10, 0, 0) };
+            _contentEntry = new Editor { Placeholder = "≈Éƒ´√§√•≈°ƒôƒçƒ£ƒ´√• ƒìƒÖƒ£√•≈Ü≈∫ƒç", HeightRequest = 200, Margin = new Thickness(0, 10, 0, 0) };
+            var saveButton = new Button { Text = "≈Éƒ´√µ≈°ƒÖƒ∑ƒç≈Ü√º", BackgroundColor = Color.FromArgb("#4CAF50"), TextColor = Colors.White, CornerRadius = 5, Margin = new Thickness(0, 10, 0, 0) };
             saveButton.Clicked += OnSaveClicked;
-            var cancelButton = new Button { Text = "ŒÚÏÂÌ‡", BackgroundColor = Color.FromArgb("#FF4444"), TextColor = Colors.White, CornerRadius = 5, Margin = new Thickness(0, 5, 0, 0) };
+            var cancelButton = new Button { Text = "ƒ™≈Üƒ£√•ƒ∑ƒÖ", BackgroundColor = Color.FromArgb("#FF4444"), TextColor = Colors.White, CornerRadius = 5, Margin = new Thickness(0, 5, 0, 0) };
             cancelButton.Clicked += (s, e) => Close();
             stackLayout.Children.Add(titleLabel);
             stackLayout.Children.Add(_titleEntry);
@@ -56,9 +62,7 @@ namespace NutikasPaevik
             if (!string.IsNullOrWhiteSpace(_titleEntry.Text) && !string.IsNullOrWhiteSpace(_contentEntry.Text))
             {
                 var random = new Random();
-
-                double rotationAngle = random.NextDouble() * 10 - 5; // ÓÚ -5 ‰Ó 5
-
+                double rotationAngle = random.NextDouble() * 10 - 5; // –æ—Ç -5 –¥–æ 5 –≥—Ä–∞–¥—É—Å–æ–≤
                 string stickerImage = StickerImages[random.Next(StickerImages.Length)];
 
                 var note = new Note
@@ -73,8 +77,25 @@ namespace NutikasPaevik
             }
             else
             {
-                Application.Current?.MainPage?.DisplayAlert("Œ¯Ë·Í‡", "«‡ÔÓÎÌËÚÂ ‚ÒÂ ÔÓÎˇ", "Œ ");
+                Application.Current?.MainPage?.DisplayAlert("Viga", "T√§itke k√µik v√§ljad", "OK");
             }
+        }
+    }
+
+    public class HalfWidthConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            if (value is double width)
+            {
+                return width / 2 - 20; // –£—á–∏—Ç—ã–≤–∞–µ–º –æ—Ç—Å—Ç—É–ø—ã
+            }
+            return 0;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

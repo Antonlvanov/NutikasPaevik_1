@@ -1,4 +1,4 @@
-namespace NutikasPaevik;
+namespace NutikasPaevik.Pages;
 
 public class FlyoutPageItem
 {
