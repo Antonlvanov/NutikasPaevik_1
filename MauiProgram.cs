@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using CommunityToolkit.Maui;
 
 namespace NutikasPaevik
 {
@@ -14,9 +15,14 @@ namespace NutikasPaevik
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+            builder.UseMauiApp<App>()
+           .ConfigureMauiHandlers(handlers => { })
+           .ConfigureEssentials(essentials => { })
+           .UseMauiCommunityToolkit()
+           .ConfigureImageSources();
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

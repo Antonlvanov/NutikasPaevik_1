@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NutikasPaevik.LoginPage"
-             Title="Login">
+             Title="Login"
+             Shell.NavBarIsVisible="False" >
+
 
     <StackLayout Padding="20" VerticalOptions="Center">
         <Entry Placeholder="Kasutajanimi" x:Name="UsernameEntry"/>

@@ -1,0 +1,88 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NutikasPaevik.DiaryPage"
+             xmlns:local="clr-namespace:NutikasPaevik.Views"
+             BackgroundColor="#F5F5F5"
+             Title="Päevik">
+
+    <ContentPage.Resources>
+        <local:HalfWidthConverter x:Key="HalfWidthConverter" />
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Основной контент -->
+        <StackLayout Padding="10">
+            <!-- Текущая дата -->
+            <Label Text="{Binding CurrentDate, StringFormat='{0:dd MMMM yyyy}'}" 
+                   FontSize="18" 
+                   FontAttributes="Bold" 
+                   TextColor="#333" 
+                   HorizontalOptions="Center" />
+
+            <!-- Список заметок -->
+            <CollectionView ItemsSource="{Binding Notes}" 
+                        VerticalOptions="FillAndExpand">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="10" 
+                           BackgroundColor="Transparent" 
+                           Margin="0" 
+                           Padding="0"
+                           HasShadow="False" 
+                           BorderColor="Transparent" 
+                           Rotation="{Binding RotationAngle}"
+                           WidthRequest="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=Width, Converter={StaticResource HalfWidthConverter}}">
+                            <Grid>
+                                <!-- Фоновое изображение стикера -->
+                                <Image Source="{Binding StickerImage}"
+                                   Aspect="Fill" 
+                                   HorizontalOptions="FillAndExpand" 
+                                   VerticalOptions="FillAndExpand" />
+                                <!-- Текст заметки -->
+                                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="15,20">
+                                    <Label Text="{Binding CreationTime, StringFormat='{0:HH:mm}'}" 
+                                       FontSize="12" 
+                                       TextColor="#666" 
+                                       HorizontalOptions="Start" />
+                                    <Label Text="{Binding Title}" 
+                                       FontSize="16" 
+                                       FontAttributes="Bold" 
+                                       TextColor="#333" 
+                                       HorizontalOptions="Start" 
+                                       LineBreakMode="WordWrap"/>
+                                    <Label Text="{Binding Content}" 
+                                       FontSize="14" 
+                                       TextColor="#666" 
+                                       MaxLines="7" 
+                                       HorizontalOptions="FillAndExpand" 
+                                       VerticalOptions="FillAndExpand"
+                                       LineBreakMode="WordWrap" />
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+
+        <!-- Кнопка с картинкой -->
+        <Button
+            ImageSource="plus.png"
+            Command="{Binding AddNoteCommand}"
+            BackgroundColor="Transparent"
+            WidthRequest="80"
+            HeightRequest="80"
+            CornerRadius="40"
+            HorizontalOptions="End"
+            VerticalOptions="End"
+            Margin="20"
+            />
+    </Grid>
+</ContentPage>

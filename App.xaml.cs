@@ -10,7 +10,15 @@
 
         public static void SwitchToMainApp()
         {
-            Current.MainPage = new AppFlyoutPage();
+            try
+            {
+                Current.MainPage = new AppShell();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"SwitchToMainApp Error: {ex.Message}");
+                Current.MainPage.DisplayAlert("Error", $"Failed to load main app: {ex.Message}", "OK");
+            }
         }
     }
 }
