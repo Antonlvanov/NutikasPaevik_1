@@ -1,9 +1,11 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Maui.Controls.Hosting;
 using CommunityToolkit.Maui;
-using Microsoft.EntityFrameworkCore;
-using System;
 using NutikasPaevik.Database;
-using NutikasPaevik.Pages.Views;
+using NutikasPaevik.Pages;
+using AppActions.Icons.Maui;
 
 namespace NutikasPaevik
 {

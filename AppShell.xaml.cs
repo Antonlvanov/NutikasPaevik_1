@@ -1,12 +1,12 @@
-﻿namespace NutikasPaevik;
+﻿using Microsoft.Maui.Controls;
+using NutikasPaevik.Pages;
+using System.Diagnostics;
 
-public partial class AppShell : Shell
+namespace NutikasPaevik
 {
-    public Command NavigateToSettingsCommand { get; }
-
-    public AppShell()
+    public partial class AppShell : Shell
     {
-        try
+        public AppShell(DiaryViewModel viewModel)
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
@@ -15,33 +15,33 @@ public partial class AppShell : Shell
             Routing.RegisterRoute(nameof(Settings), typeof(Settings));
             Routing.RegisterRoute(nameof(Account), typeof(Account));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
+
+            // Установка DiaryPage с viewModel
+            var diarySection = (ShellSection)Items[1].Items[0];
+            diarySection.Items[0].Content = new DiaryPage(viewModel);
+            Debug.WriteLine($"AppShell: DiaryPage created with viewModel: {viewModel?.GetType().Name}");
         }
-        catch (Exception ex)
+
+        private async void OnProfileClicked(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine($"AppShell Error: {ex.Message}");
-            throw; // Для отладки, потом можно убрать
-        }
-    }
-
-    private async void OnProfileClicked(object sender, EventArgs e)
-    {
-        await GoToAsync(nameof(Account));  // Используем относительный маршрут
-        FlyoutIsPresented = false;
-    }
-
-    private async void OnSettingsClicked(object sender, EventArgs e)
-    {
-        await GoToAsync(nameof(Settings));  // Используем относительный маршрут
-        FlyoutIsPresented = false;
-    }
-
-    private async void OnLogoutClicked(object sender, EventArgs e)
-    {
-        bool confirm = await DisplayAlert("Kinnitus", "Kas soovid välja logida?", "Jah", "Ei");
-        if (confirm)
-        {
-            await GoToAsync(nameof(LoginPage));  // Используем относительный маршрут
+            await GoToAsync(nameof(Account));
             FlyoutIsPresented = false;
+        }
+
+        private async void OnSettingsClicked(object sender, EventArgs e)
+        {
+            await GoToAsync(nameof(Settings));
+            FlyoutIsPresented = false;
+        }
+
+        private async void OnLogoutClicked(object sender, EventArgs e)
+        {
+            bool confirm = await DisplayAlert("Kinnitus", "Kas soovid välja logida?", "Jah", "Ei");
+            if (confirm)
+            {
+                await GoToAsync(nameof(LoginPage));
+                FlyoutIsPresented = false;
+            }
         }
     }
 }

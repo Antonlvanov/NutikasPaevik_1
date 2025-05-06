@@ -16,11 +16,8 @@
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="Padding" Value="0"/>
                 <Setter Property="ImageSource" Value="{Binding Source={RelativeSource Self}, Path=ImageSource}"/>
-
-                <!-- Замените ContentLayout на VerticalOptions -->
                 <Setter Property="VerticalOptions" Value="Center"/>
                 <Setter Property="HorizontalOptions" Value="Center"/>
-
                 <Style.Triggers>
                     <Trigger TargetType="Button" Property="IsPressed" Value="True">
                         <Setter Property="Opacity" Value="0.7"/>
@@ -29,66 +26,57 @@
             </Style>
         </ResourceDictionary>
     </Shell.Resources>
-    
-	<!-- Заголовок меню -->
-	<Shell.FlyoutHeader>
-		<StackLayout HeightRequest="100">
+
+    <Shell.FlyoutHeader>
+        <StackLayout HeightRequest="100">
             <Image Source="logo.png"
                    Margin="0,10,0,0"
                    HeightRequest="80"
                    HorizontalOptions="Center"/>
         </StackLayout>
-	</Shell.FlyoutHeader>
+    </Shell.FlyoutHeader>
 
-	<!-- Пункты меню -->
-	<FlyoutItem Title="Koduleht" Icon="contacts.png">
+    <FlyoutItem Title="Koduleht" Icon="contacts.png">
         <ShellContent Route="Koduleht" ContentTemplate="{DataTemplate local:HomePage}"/>
-	</FlyoutItem>
+    </FlyoutItem>
 
-	<FlyoutItem Title="Päevik" Icon="todo.png">
-        <ShellContent Route="Paevik" ContentTemplate="{DataTemplate local:DiaryPage}"/>
-	</FlyoutItem>
+    <FlyoutItem Title="Päevik" Icon="todo.png">
+        <ShellContent Route="Paevik" />
+    </FlyoutItem>
 
-	<FlyoutItem Title="Planeeria" Icon="reminders.png">
+    <FlyoutItem Title="Planeeria" Icon="reminders.png">
         <ShellContent Route="Planeeria" ContentTemplate="{DataTemplate local:PlannerPage}"/>
-	</FlyoutItem>
+    </FlyoutItem>
 
-	<!-- Нижний колонтитул меню -->
     <Shell.FlyoutFooter>
         <Grid ColumnDefinitions="*,*,*" 
-          HeightRequest="60"
-          Padding="30,0"
-          ColumnSpacing="0">
-
-            <!-- Кнопка 1 - Профиль -->
+              HeightRequest="60"
+              Padding="30,0"
+              ColumnSpacing="0">
             <Button Grid.Column="0"
-                HorizontalOptions="Center"
-                ImageSource="account.png"
-                Clicked="OnProfileClicked"
-                Padding="0,0"
-                Margin="0,0,5,0"
-                BackgroundColor="Transparent"
-                Style="{StaticResource FlyoutFooterButton}"/>
-
-            <!-- Кнопка 2 - Настройки -->
+                    HorizontalOptions="Center"
+                    ImageSource="account.png"
+                    Clicked="OnProfileClicked"
+                    Padding="0,0"
+                    Margin="0,0,5,0"
+                    BackgroundColor="Transparent"
+                    Style="{StaticResource FlyoutFooterButton}"/>
             <Button Grid.Column="1"
-                ImageSource="settings.png"
-                Clicked="OnSettingsClicked"
-                Padding="4,0"
-                Margin="0,0,0,0"
-                HorizontalOptions="Center"
-                BackgroundColor="Transparent"
-                Style="{StaticResource FlyoutFooterButton}"/>
-
-            <!-- Кнопка 3 - Выход -->
+                    ImageSource="settings.png"
+                    Clicked="OnSettingsClicked"
+                    Padding="4,0"
+                    Margin="0,0,0,0"
+                    HorizontalOptions="Center"
+                    BackgroundColor="Transparent"
+                    Style="{StaticResource FlyoutFooterButton}"/>
             <Button Grid.Column="2"
-                ImageSource="logout2.png"
-                Padding="0,0"
-                Margin="15,0,0,0"
-                Clicked="OnLogoutClicked"
-                HorizontalOptions="End"
-                BackgroundColor="Transparent"
-                Style="{StaticResource FlyoutFooterButton}"/>
+                    ImageSource="logout2.png"
+                    Padding="0,0"
+                    Margin="15,0,0,0"
+                    Clicked="OnLogoutClicked"
+                    HorizontalOptions="End"
+                    BackgroundColor="Transparent"
+                    Style="{StaticResource FlyoutFooterButton}"/>
         </Grid>
     </Shell.FlyoutFooter>
 </Shell>

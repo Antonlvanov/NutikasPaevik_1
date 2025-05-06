@@ -1,4 +1,5 @@
-﻿using NutikasPaevik.Pages.Views;
+﻿using Microsoft.Maui.Controls;
+using NutikasPaevik.Pages;
 
 namespace NutikasPaevik
 {
@@ -10,22 +11,18 @@ namespace NutikasPaevik
         {
             InitializeComponent();
             _viewModel = viewModel;
-            BindingContext = this; // Или другой ViewModel для логина
+            BindingContext = this;
         }
 
-        // Пример метода для кнопки логина
         private async void OnLoginClicked(object sender, EventArgs e)
         {
             try
             {
-                // Здесь должна быть логика аутентификации
-                // Например, проверка логина и пароля
+                // Симуляция аутентификации
                 bool isAuthenticated = true; // Замените на реальную проверку
-
                 if (isAuthenticated)
                 {
-                    // Переключение на AppShell
-                    App.SwitchToMainApp();
+                    App.SwitchToMainApp(_viewModel);
                 }
                 else
                 {
