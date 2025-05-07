@@ -5,7 +5,6 @@ using Microsoft.Maui.Controls.Hosting;
 using CommunityToolkit.Maui;
 using NutikasPaevik.Database;
 using NutikasPaevik.Pages;
-using AppActions.Icons.Maui;
 
 namespace NutikasPaevik
 {

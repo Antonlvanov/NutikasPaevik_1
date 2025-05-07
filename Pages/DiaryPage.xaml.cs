@@ -1,9 +1,4 @@
 ﻿using CommunityToolkit.Maui.Views;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows.Input;
 using Microsoft.Maui.Controls;
 using NutikasPaevik.Database;
 using System.Diagnostics;
@@ -14,16 +9,11 @@ namespace NutikasPaevik
     {
         private readonly DiaryViewModel _viewModel;
 
-        public DiaryPage() : this(DependencyService.Get<DiaryViewModel>())
-        {
-        }
-
-        public DiaryPage(DiaryViewModel viewModel)
+        public DiaryPage()
         {
             InitializeComponent();
-            _viewModel = viewModel;
+            _viewModel = MauiProgram.CreateMauiApp().Services.GetService<DiaryViewModel>();
             BindingContext = _viewModel;
-            Debug.WriteLine($"DiaryPage BindingContext set to: {BindingContext?.GetType().Name}");
         }
 
         protected override void OnAppearing()
@@ -32,22 +22,12 @@ namespace NutikasPaevik
             if (BindingContext != _viewModel)
             {
                 BindingContext = _viewModel;
-                Debug.WriteLine($"DiaryPage OnAppearing: BindingContext reset to: {BindingContext?.GetType().Name}");
             }
         }
 
         private async void OnAddButtonClicked(object sender, EventArgs e)
         {
-            Debug.WriteLine("Add button clicked");
-            if (BindingContext is DiaryViewModel viewModel)
-            {
-                await viewModel.ShowNotePopup();
-            }
-            else
-            {
-                Debug.WriteLine("BindingContext is not DiaryViewModel");
-                await _viewModel.ShowNotePopup();
-            }
+            await _viewModel.ShowNotePopup();
         }
     }
 

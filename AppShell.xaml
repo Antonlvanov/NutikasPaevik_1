@@ -41,7 +41,7 @@
     </FlyoutItem>
 
     <FlyoutItem Title="Päevik" Icon="todo.png">
-        <ShellContent Route="Paevik" />
+        <ShellContent Route="Paevik" ContentTemplate="{DataTemplate local:DiaryPage}"/>
     </FlyoutItem>
 
     <FlyoutItem Title="Planeeria" Icon="reminders.png">

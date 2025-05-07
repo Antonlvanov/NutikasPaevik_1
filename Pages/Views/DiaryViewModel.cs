@@ -26,12 +26,13 @@ namespace NutikasPaevik
             LoadNotes();
         }
 
-        public void LoadNotes()
+        private void LoadNotes()
         {
             try
             {
                 var notes = _dbContext.Notes.ToList();
                 Debug.WriteLine($"Loaded {notes.Count} notes from database.");
+                Notes.Clear();
                 foreach (var note in notes)
                 {
                     Notes.Add(note);
@@ -44,7 +45,7 @@ namespace NutikasPaevik
             }
         }
 
-        public async Task DeleteNote(Note note)
+        private async Task DeleteNote(Note note)
         {
             try
             {

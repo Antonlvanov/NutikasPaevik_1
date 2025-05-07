@@ -76,7 +76,6 @@
         <Button x:Name="AddButton"
                 ImageSource="plus.png"
                 Command="{Binding AddNoteCommand}"
-                Clicked="OnAddButtonClicked"
                 BackgroundColor="Transparent"
                 WidthRequest="80"
                 HeightRequest="80"

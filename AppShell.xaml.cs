@@ -1,12 +1,10 @@
 ﻿using Microsoft.Maui.Controls;
-using NutikasPaevik.Pages;
-using System.Diagnostics;
 
 namespace NutikasPaevik
 {
     public partial class AppShell : Shell
     {
-        public AppShell(DiaryViewModel viewModel)
+        public AppShell()
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
@@ -15,11 +13,6 @@ namespace NutikasPaevik
             Routing.RegisterRoute(nameof(Settings), typeof(Settings));
             Routing.RegisterRoute(nameof(Account), typeof(Account));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
-
-            // Установка DiaryPage с viewModel
-            var diarySection = (ShellSection)Items[1].Items[0];
-            diarySection.Items[0].Content = new DiaryPage(viewModel);
-            Debug.WriteLine($"AppShell: DiaryPage created with viewModel: {viewModel?.GetType().Name}");
         }
 
         private async void OnProfileClicked(object sender, EventArgs e)

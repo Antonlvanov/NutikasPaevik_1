@@ -1,24 +1,20 @@
-﻿using NutikasPaevik.Pages;
+﻿using Microsoft.Maui.Controls;
 
 namespace NutikasPaevik
 {
     public partial class App : Application
     {
-        private readonly DiaryViewModel _viewModel;
-        public App(DiaryViewModel viewModel)
+        public App()
         {
             InitializeComponent();
-            // Стартовая страница - LoginPage
-            MainPage = new NavigationPage(new LoginPage(viewModel));
-            _viewModel = viewModel;
+            MainPage = new NavigationPage(new LoginPage());
         }
 
-        public static void SwitchToMainApp(DiaryViewModel viewModel)
+        public static void SwitchToMainApp()
         {
             try
             {
-                // Переключение на AppShell после логина
-                Current.MainPage = new AppShell(viewModel);
+                Current.MainPage = new AppShell();
             }
             catch (Exception ex)
             {
